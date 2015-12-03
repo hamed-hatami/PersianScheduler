@@ -68,9 +68,9 @@ public class PersianScheduler extends UIInput implements NamingContainer {
         }
         writer.endElement("input");
 
-        writer.write("<script>$(document).ready(function() {$('#calendar').fullCalendar({" + content + "});</script>");
+        writer.write("<script>$(document).ready(function() {$('#calendar_" + clientId + "').fullCalendar({" + content + "});</script>");
+        writer.write("<div id='calendar_" + clientId + "'/>");
 
-        writer.write("<div id='calendar'/>");
         writer.flush();
         writer.close();
 

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="PersianScheduler" default="deploy" basedir=".">
+
+    <description>PersianScheduler</description>
+
+    <property environment="env"/>
+    <property name="display.name" value="PersianScheduler"/>
+    <property name="name" value="PersianScheduler"/>
+    <property name="lib.dir" value="lib"/>
+
+    <property name="bin.dir" value="bin"/>
+    <property name="build.dir" value="build"/>
+    <property name="deploy.dir" value="/home/hatami/project/NEJAT/lib"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+
+    <property name="resources.dir" value="resources"/>
+
+    <property name="src.dir" value="src"/>
+
+    <property name="classes.prefix" value="ir/hatami"/>
+    <property name="src.classes.prefix" value="${classes.prefix}"/>
+
+
+    <property name="javac.debug" value="true"/>
+    <property name="javac.deprecation" value="false"/>
+    <property name="javac.version" value="1.8"/>
+
+
+    <path id="classpath">
+        <pathelement path="."/>
+    </path>
+
+    <path id="build.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <path id="compile.classpath">
+        <path refid="build.classpath"/>
+        <pathelement location="${classes.dir}"/>
+    </path>
+
+    <patternset id="meta.files">
+        <include name="**/*.dtd"/>
+        <include name="**/*.xml"/>
+        <include name="**/*.xslt"/>
+        <include name="**/*.properties"/>
+    </patternset>
+
+    <patternset id="src.files">
+        <include name="**/*.java"/>
+    </patternset>
+
+    <target name="clean" description="Cleans up the build directory">
+        <delete dir="${build.dir}/classes/${src.classes.prefix}"/>
+        <delete>
+            <fileset dir="${build.dir}">
+                <include name="PersianScheduler.*"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="init" description="Initialize the build">
+        <echo message="Build ${display.name}"/>
+        <tstamp/>
+        <mkdir dir="${classes.dir}"/>
+        <copy todir="${classes.dir}">
+            <fileset dir="${src.dir}">
+                <patternset refid="meta.files"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="native2ascii">
+        <native2ascii src="." dest="${classes.dir}"
+                      includes="PersianScheduler*.properties"
+                      encoding="UTF-8"/>
+    </target>
+
+    <target name="compile" depends="init, clean" description="Compile the Java source code">
+        <javac destdir="${classes.dir}"
+               classpathref="compile.classpath"
+               debug="${javac.debug}"
+               deprecation="${javac.deprecation}"
+               encoding="UTF-8"
+               source="1.8"
+               nowarn="on">
+            <compilerarg value="-Xlint:deprecation"/>
+            <src path="${src.dir}"/>
+        </javac>
+
+    </target>
+
+    <!-- ############################ Main Tragets #############################-->
+
+    <target name="jar" depends="compile, native2ascii">
+        <delete file="${build.dir}/${name}.jar" verbose="yes"/>
+        <jar jarfile="${build.dir}/${name}.jar">
+            <fileset dir="${classes.dir}">
+                <include name="**/hatami/**/*.class"/>
+            </fileset>
+            <zipfileset id="xml.metainf" prefix="META-INF" dir="META-INF">
+                <include name="*.taglib.xml"/>
+            </zipfileset>
+            <zipfileset id="js.metainf" prefix="META-INF/resources" dir="META-INF/resources">
+                <include name="*.js"/>
+                <include name="**/*.js"/>
+            </zipfileset>
+            <zipfileset id="css.metainf" prefix="META-INF/resources" dir="META-INF/resources">
+                <include name="*.css"/>
+                <include name="*.png"/>
+                <include name="*.gif"/>
+                <include name="**/*.css"/>
+                <include name="**/*.png"/>
+                <include name="**/*.gif"/>
+            </zipfileset>
+            <manifest>
+                <attribute name="Built-By" value="Hamed Hatami"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="deploy" depends="jar">
+        <copy file="${build.dir}/${name}.jar" todir="${deploy.dir}" overwrite="yes" verbose="yes"/>
+    </target>
+
+</project>

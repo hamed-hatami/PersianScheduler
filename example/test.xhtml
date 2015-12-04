@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:s="http://scheduler.persian.hatami.ir/persianScheduler">
+
+<f:view>
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta http-equiv="cache-control" content="max-age=0"/>
+        <meta http-equiv="cache-control" content="no-cache"/>
+        <meta http-equiv="cache-control" content="no-store"/>
+        <meta http-equiv="expires" content="0"/>
+        <meta http-equiv="pragma" content="no-cache"/>
+        <title>Test Page</title>
+    </h:head>
+
+    <h:body>
+        <s:persianScheduler value="
+            defaultDate: '2015-12-12',
+			editable: false,
+			eventLimit: true,
+			events: [
+				{
+					title: 'All Day Event',
+					start: '2015-12-03'
+				},
+				{
+					title: 'Long Event',
+					start: '2015-12-07',
+					end: '2015-12-10'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2015-12-09T16:00:00'
+				},
+				{
+					id: 999,
+					title: 'Repeating Event',
+					start: '2015-12-16T16:00:00'
+				},
+				{
+					title: 'Conference',
+					start: '2015-12-11',
+					end: '2015-12-13'
+				},
+				{
+					title: 'Meeting',
+					start: '2015-12-12T10:30:00',
+					end: '2015-12-12T12:30:00'
+				},
+				{
+					title: 'Lunch',
+					start: '2015-12-12T12:00:00'
+				},
+				{
+					title: 'Meeting',
+					start: '2015-12-12T14:30:00'
+				},
+				{
+					title: 'Happy Hour',
+					start: '2015-12-12T17:30:00'
+				},
+				{
+					title: 'Dinner',
+					start: '2015-12-12T20:00:00'
+				},
+				{
+					title: 'Birthday Party',
+					start: '2015-12-13T07:00:00'
+				},
+				{
+					title: 'Click for Google',
+					url: 'http://google.com/',
+					start: '2015-12-28'
+				}
+			]});"/>
+    </h:body>
+</f:view>
+</html>

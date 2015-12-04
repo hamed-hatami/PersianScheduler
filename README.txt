@@ -31,11 +31,7 @@
 
   The usage of this component is in the example directory like below :
 
-   <s:persianScheduler value="
-               defaultDate: '2015-12-12',
-   			editable: false,
-   			eventLimit: true,
-   			events: [
+    <s:persianScheduler eventLimit="true" editable="true" defaultDate="2015-12-12" events="[
    				{
    					title: 'All Day Event',
    					start: '2015-12-03'
@@ -90,4 +86,4 @@
    					url: 'http://google.com/',
    					start: '2015-12-28'
    				}
-   			]});"/>
+   			]"/>

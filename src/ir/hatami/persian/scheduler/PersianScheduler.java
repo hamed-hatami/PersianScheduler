@@ -56,19 +56,60 @@ public class PersianScheduler extends UIInput implements NamingContainer {
     }
 
     private void encodeInputField(ResponseWriter writer, String clientId) throws IOException {
-        String content = "";
+        StringBuilder finalContent = new StringBuilder();
+        String events = "";
+        String defaultDate = "";
+        String editable = "";
+        String eventLimit = "";
         writer.startElement("input", this);
         writer.writeAttribute("name", clientId, "clientId");
         writer.writeAttribute("id", clientId, "clientId");
         writer.writeAttribute("type", "hidden", "type");
-        Object value = getValue();
-        if (value != null) {
-            content = (String) value;
-            writer.writeAttribute("value", content, "value");
+
+        if (getAttributes().get("events") instanceof String) {
+            if (!getAttributes().get("events").toString().isEmpty()) {
+                events = getAttributes().get("events").toString();
+                writer.writeAttribute("events", getAttributes().get("events").toString(), "events");
+            }
         }
+
+        if (getAttributes().get("defaultDate") instanceof String) {
+            if (!getAttributes().get("defaultDate").toString().isEmpty()) {
+                defaultDate = getAttributes().get("defaultDate").toString();
+                writer.writeAttribute("defaultDate", getAttributes().get("defaultDate").toString(), "defaultDate");
+            }
+        }
+
+        if (getAttributes().get("editable") instanceof String) {
+            if (!getAttributes().get("editable").toString().isEmpty()) {
+                editable = getAttributes().get("editable").toString();
+                writer.writeAttribute("editable", getAttributes().get("editable").toString(), "editable");
+            }
+        }
+
+        if (getAttributes().get("eventLimit") instanceof String) {
+            if (!getAttributes().get("eventLimit").toString().isEmpty()) {
+                eventLimit = getAttributes().get("eventLimit").toString();
+                writer.writeAttribute("eventLimit", getAttributes().get("eventLimit").toString(), "eventLimit");
+            }
+        }
+
         writer.endElement("input");
 
-        writer.write("<script>$(document).ready(function() {$('#calendar_" + clientId + "').fullCalendar({" + content + "});</script>");
+        finalContent.append("defaultDate:")
+                .append("'" + defaultDate + "'")
+                .append(",")
+                .append("editable:")
+                .append(editable)
+                .append(",")
+                .append("eventLimit:")
+                .append(eventLimit)
+                .append(",")
+                .append("events:")
+                .append(events)
+                .append("});");
+
+        writer.write("<script>$(document).ready(function() {$('#calendar_" + clientId + "').fullCalendar({" + finalContent.toString() + "});</script>");
         writer.write("<div id='calendar_" + clientId + "'/>");
 
         writer.flush();

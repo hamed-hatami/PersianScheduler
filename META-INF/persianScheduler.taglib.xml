@@ -12,6 +12,47 @@
         <component>
             <component-type>ir.hatami.persian.scheduler.PersianScheduler</component-type>
         </component>
+        <attribute>
+            <description>name</description>
+            <name>name</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>id</description>
+            <name>id</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>events</description>
+            <name>events</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>type</description>
+            <name>type</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>defaultDate</description>
+            <name>defaultDate</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>editable</description>
+            <name>editable</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
+        <attribute>
+            <description>eventLimit</description>
+            <name>eventLimit</name>
+            <required>true</required>
+            <type>java.lang.String</type>
+        </attribute>
     </tag>
-
 </facelet-taglib>

@@ -11,7 +11,7 @@
 
     <property name="bin.dir" value="bin"/>
     <property name="build.dir" value="build"/>
-    <property name="deploy.dir" value="/home/hatami/project/NEJAT/lib"/>
+    <property name="deploy.dir" value="/home/hatami/project/SIB/lib"/>
     <property name="classes.dir" value="${build.dir}/classes"/>
 
     <property name="resources.dir" value="resources"/>

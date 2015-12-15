@@ -7,9 +7,13 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.NamingContainer;
 import javax.faces.component.UIComponentBase;
 import javax.faces.component.UIInput;
+import javax.faces.component.behavior.ClientBehaviorHolder;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -23,7 +27,9 @@ import java.util.Map;
         @ResourceDependency(name = "fullcalendar.css", target = "head"),
         @ResourceDependency(name = "fullcalendar.min.js", target = "head")
 })
-public class PersianScheduler extends UIInput implements NamingContainer {
+public class PersianScheduler extends UIInput implements ClientBehaviorHolder {
+
+    private static final Collection<String> EVENT_NAMES = Collections.unmodifiableCollection(Arrays.asList("blur", "change", "click", "valueChange", "dblclick", "focus", "keydown", "keypress", "keyup", "mousedown", "mousemove", "mouseout", "mouseover", "mouseup", "select"));
 
     public PersianScheduler() {
         setRendererType(null);
@@ -32,6 +38,11 @@ public class PersianScheduler extends UIInput implements NamingContainer {
     @Override
     public String getFamily() {
         return "javax.faces.NamingContainer";
+    }
+
+    @Override
+    public Collection<String> getEventNames() {
+        return EVENT_NAMES;
     }
 
     @Override
